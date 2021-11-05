@@ -1,0 +1,62 @@
+<h2> Cadastrar Carros Vendidos</h2>
+<hr>
+
+<form #myForm="ngForm" >  
+
+  <div class="form-group row">
+    <label class="mr-2"> Nome do Carro </label>
+      <input  name="carro" [(ngModel)]="carro" class="form-control col-5"  required maxlength="50">
+
+      <div class="invalid-feedback">   <!-- Bootstrap mensagem de invalido form ira aparecer o span-->
+        <span>é obrigatório</span>
+      </div>
+    
+  </div>
+
+  <div class="form-group row">
+  <label class="col-2 col-form-label">Tipo:</label>
+  <div class="col-6">
+    <select  name="ds_Tipo"  class="form-control" [(ngModel)]="tipo" required>
+
+    <option value="NOVO">NOVO</option>
+    <option value="USADO">USADO</option>
+    </select>
+
+  </div>
+</div>
+
+
+
+ 
+
+
+
+
+  <button (click)="addItem()" [disabled]="myForm.invalid" class="btn btn-primary mr-2">Save</button>
+  <button [routerLink]="['/index']" class="btn btn-secondary">Back</button>
+
+</form>
+
+<hr/>
+
+<h2> Lista dos Carros Vendidos </h2>
+
+<table class="table table-striped table-hover">
+<thead class="thead-dark">
+<tr>
+  <th>Carro</th>
+  <th>Tipo</th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let item of list | async">
+  <td [title]="['chave: '+item.key]">{{item.carro}}</td>
+  <td [title]="['chave: '+item.key]">{{item.tipo}}</td>
+ 
+  <td>
+    <a  (click)="deleteItem(item.key)"     class="btn btn-danger">Excluir</a>   
+  </td>
+</tr>
+</tbody>
+</table>
